@@ -12,7 +12,24 @@
       <a class="navbar-brand" href="#">gCamp</a>
     </div>
   </nav>
-<%= yield %>
+
+  <div class="container">
+    <%= yield %>
+
+    <div class="page-header">
+
+    </div>
+
+    <footer>
+      <%= link_to 'About', terms_path(@terms) %>  |
+      <%= link_to 'Terms', terms_path(@terms) %>  |
+      <%= link_to 'FAQ', terms_path(@terms) %>  
+    </footer>
+
+
+
+
+  </div>
 
 </body>
 </html>

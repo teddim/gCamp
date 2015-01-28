@@ -18,3 +18,11 @@
 @import "bootstrap";
 
 body { padding-top: 70px; }
+
+.page-header.footer {
+  padding: 0px;
+}
+.breadcrumb {
+  background-color: transparent;
+  list-style-type: disc;
+}
