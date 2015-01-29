@@ -20,19 +20,30 @@
 
     </div>
 
-    <footer>
-      
-<div class="navbar-left">
-      <%= link_to 'About', about_path(@about) %> |
-      <%= link_to 'Terms', terms_path(@terms) %>
-</div>
+  <footer>
 
-<div class="navbar-right">
-        <%= image_tag "linkedin.jpg", height:"30" %>
-        <%= image_tag "github.png" , height:"30"  %>
-        <%= image_tag "twitter.png", height:"30"  %>
-        <%= image_tag "galvanize.png", height:"30" %>
-</div>
+    <div class="navbar-left">
+          <%= link_to 'About', about_path(@about) %> |
+          <%= link_to 'Terms', terms_path(@terms) %>
+    </div>
+
+    <div class="navbar-right">
+            <%= link_to "http://www.linkedin.com/in/teddimaull/" do%>
+              <%= image_tag "linkedin.jpg", height:"30" %>
+            <% end %>
+
+            <%= link_to "http://github.com/teddim" do%>
+              <%= image_tag "github.png" , height:"30"  %>
+            <% end %>
+
+            <%= link_to "http://twitter.com/teddimaull" do%>
+              <%= image_tag "twitter.png", height:"30"  %>
+            <% end %>
+
+            <%= link_to "https://students.gschool.it/students/292" do%>
+              <%= image_tag "galvanize.png", height:"30" %>
+            <% end %>
+    </div>
 
 
 
