@@ -19,6 +19,14 @@
 
 body { padding-top: 70px; }
 
-.page-header.footer {
-  padding: 0px;
+footer .navbar-right {
+  float: right !important;
+  margin-right: -15px;
+
+}
+
+footer .navbar-left {
+  float: left !important;
+  margin-right: -15px;
+
 }
