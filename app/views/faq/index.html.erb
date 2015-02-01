@@ -3,5 +3,12 @@
 </div>
 
 <ul>
-  <li>question: <%= @questions %></li>
+  <% @faq_array.each do |question| %>
+    <li>question: <%= question.get_question %></li>
+  <% end %>
 </ul>
+
+<% @faq_array.each do |question| %>
+  <p><%= question.get_question %></p>
+  <p><%= question.get_answer %></p>
+<% end %>

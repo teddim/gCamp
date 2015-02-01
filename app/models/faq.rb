@@ -1,23 +1,27 @@
-class Faq < ActiveRecord::Base
+class Faq
 
-  def initialize(question,answer,slug)
+  def initialize(question,answer)
     @question = question
     puts "This is the model speaking"
+    puts "question:" + @question
     @answer = answer
-    @slug = slugs
+    puts "answer:" + @answer
+    @slug = @question.gsub(" ","-")
+    puts "slug:" + @slug
   end
 
-  def self.get_question(faq_array)
+  def get_question
     p "HEY THIS IS THE MODEL SPEAKING"
-    return faq_array[0]
+    # p faq_array
+    return @question
   end
 
-  def self.answer(id)
-    return id
+  def get_answer
+    return @answer
   end
 
-  def self.slugs(answer)
+  def get_slug
     #replace spaces with -
-    return answer
+    return @slug
   end
 end
