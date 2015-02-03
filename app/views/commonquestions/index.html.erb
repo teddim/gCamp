@@ -4,14 +4,14 @@
 
 <ul>
   <% @faq_array.each do |faq| %>
-    <li><%= link_to faq.get_question, :anchor => faq.get_slug %></li>
+    <li><%= link_to faq.question, :anchor => faq.slug %></li>
   <% end %>
 </ul>
 
 <% @faq_array.each do |faq| %>
-  <h3 id= <%= faq.get_slug %> >
-    <%= faq.get_question %>
+  <h3 id= <%= faq.slug %> >
+    <%= faq.question %>
   </h3>
-  <p><%= faq.get_answer %></p>
+  <p><%= faq.answer %></p>
   <a href="#">top</a>
 <% end %>

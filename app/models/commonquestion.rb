@@ -5,17 +5,12 @@ class Commonquestion
     puts "This is the model speaking...initializing"
     @answer = answer
     @slug = @question.gsub(" ","-")
+
   end
 
-  def get_question
-    return @question
-  end
+  attr_reader :question
+  attr_reader :answer
+  attr_reader :slug
 
-  def get_answer
-    return @answer
-  end
 
-  def get_slug
-    return @slug
-  end
 end
