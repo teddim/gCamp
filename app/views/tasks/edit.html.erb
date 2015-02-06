@@ -2,7 +2,7 @@
   <h1>Edit Task</h1>
 </div>
 
-<%= form_for Task.new do |t| %>
+<%= form_for @task do |t| %>
 <div><%= t.label :description  %></div>
 <div><%= t.text_field :description %></div>
 <%= t.submit "Edit Task" %>
