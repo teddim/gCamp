@@ -6,7 +6,7 @@ Rails.application.routes.draw do
    root "welcome#index"
    get '/terms' => 'terms#index'
    get '/about' => 'about#index'
-   get '/faq' => 'commonquestions#index'   
+   get '/faq' => 'commonquestions#index'
 
 
   # Example of regular route:
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :tasks
 
   # Example resource route with options:
   #   resources :products do
