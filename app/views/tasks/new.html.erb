@@ -1,1 +1,11 @@
-Tasks: New
+<div class="page-header">
+  <h1>New Task</h1>
+</div>
+
+<%= form_for Task.new do |t| %>
+  <div><%= t.label :description  %></div>
+  <div><%= t.text_field :description %></div>
+  <%= t.submit "Create Task" %>
+<% end %>
+
+<%= link_to "Back", :back %>
