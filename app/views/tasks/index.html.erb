@@ -1,1 +1,15 @@
-Tasks: Index
+<div class="page-header">
+  <h1>Listing Tasks</h1>
+</div>
+
+<h3>Description</h3>
+  <div>
+    <% @tasks.each do |task| %>
+
+      <p><%= task.description %></p>
+      <% end %>
+  </div>
+
+<div>
+<%= link_to "New Task", new_task_path %>
+</div>
