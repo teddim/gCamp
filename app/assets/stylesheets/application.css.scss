@@ -34,3 +34,17 @@ footer .navbar-left {
 .extra-padding {
   padding-bottom: 20px;
 }
+
+.breadcrumb {
+  background-color: #ffffff;
+  padding-left: 0px;
+
+}
+
+.breadcrumb>li+li:before {
+  content: "\003e";
+}
+
+.breadcrumb>.active {
+  color: #000;
+}
