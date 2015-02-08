@@ -6,7 +6,12 @@
   <div>
     <% @tasks.each do |task| %>
 
-      <p><%= task.description %></p>
+      <p><%= task.description %>
+      <%= link_to "Show", task %>
+
+      <%= link_to 'Edit', edit_task_path(task) %>
+      <%= link_to 'Destroy', task, method: :delete %>
+      </p>
       <% end %>
   </div>
 
