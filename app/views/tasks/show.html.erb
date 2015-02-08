@@ -1,7 +1,7 @@
 <div class="page-header">
   <%= link_to "Edit", edit_task_path, class: "btn btn-info pull-right" %>
 
-  <h1><%= @task.description.titleize %>
+  <h1><%= @task.description.downcase.titleize %>
     </h1>
 </div>
 
