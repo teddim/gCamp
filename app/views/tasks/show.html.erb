@@ -1,13 +1,10 @@
 <div class="page-header">
-
+  <h1><%= @task.description.titleize %>
+    <%= link_to "Edit", edit_task_path, class: "btn btn-primary pull-right" %>
+  </h1>
 </div>
 
-<div>
-  <p> Description</p>
-  <p><%= @task.description %></p>
-</div>
-
-<div>
-  <%= link_to "Edit", edit_task_path %> |
-  <%= link_to "Back", :back %>
-</div>
+<ol class="breadcrumb">
+  <li><%= link_to 'Tasks', tasks_path %></li>
+  <li class="active"><%= @task.description %></li>
+</ol>

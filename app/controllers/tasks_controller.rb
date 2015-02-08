@@ -12,7 +12,7 @@ class TasksController < ApplicationController
     task = Task.new(task_params)
     task.save
     flash[:notice] = "Task was successfully created."
-    redirect_to tasks_path
+    redirect_to task_path(task)
     # , {:notice => "You have successfully created it."}
   end
 
@@ -28,7 +28,7 @@ class TasksController < ApplicationController
       flash[:notice] = "Task was successfully updated."
       @referrer = request.referrer
       puts @referrer
-      redirect_to task_path
+      redirect_to task_path(@task)
     else
       render :edit
     end
