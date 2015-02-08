@@ -1,4 +1,4 @@
-class Commonquestion
+class CommonQuestion
 
   def initialize(question,answer)
     @question = question

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
    root "welcome#index"
    get '/terms' => 'terms#index'
    get '/about' => 'about#index'
-   get '/faq' => 'commonquestions#index'
+   get '/faq' => 'common_questions#index'
 
 
   # Example of regular route:
