@@ -19,7 +19,6 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-
   end
 
   def update
@@ -27,8 +26,6 @@ class TasksController < ApplicationController
 
     if @task.update(task_params)
       flash[:notice] = "Task was successfully updated."
-      @referrer = request.referrer
-      puts @referrer
       redirect_to task_path(@task)
     else
       render :edit
@@ -51,4 +48,5 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:description)
   end
+  
 end
