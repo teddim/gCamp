@@ -12,7 +12,11 @@
 
   <% @tasks.each do |task| %>
   <tr>
+    <% if task.completed %>
+      <td><s><%= link_to task.description, task %></s></td>
+    <% else %>
     <td><%= link_to task.description, task %></td>
+    <% end %>
     <td class="text-right">
       <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
       <%= link_to 'Delete', task, method: :delete, class: "btn btn-danger" %>

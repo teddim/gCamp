@@ -7,6 +7,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @page_name = "New"
   end
 
   def create
@@ -19,6 +20,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+    @page_name = "Edit"
   end
 
   def update
@@ -46,7 +48,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:description)
+    params.require(:task).permit(:description, :completed)
   end
-  
+
 end

@@ -1,7 +1,12 @@
 
 <ol class="breadcrumb">
   <li><%= link_to 'Tasks', tasks_path %></li>
-  <li class="active">New Task</li>
+    <% if @task[:description] != nil %>
+    <li>
+      <%= link_to @task[:description], task_path(@task) %>
+    </li>
+  <% end %>
+  <li class="active"> <%= @page_name %> Task</li>
 </ol>
 
 <%= form_for(@task, html: { class: "form-horizontal" }) do |t| %>
@@ -11,11 +16,19 @@
     <div class= "col-sm-6">
       <%= t.text_field :description, class:"form-control" %>
     </div>
+
 </div>
 
 
 <div class= "form-group">
-  <div class="col-sm-6 col-sm-offset-2">
+  <div class="row col-sm-6 col-sm-offset-2">
+    <% if @page_name != "New" %>
+    <p><%= t.check_box :completed, {}, true, false %>
+      Complete</p>
+    <% end %>
+  </div>
+
+  <div class="row col-sm-6 col-sm-offset-2 extra-padding">
     <%= t.submit class: "btn btn-primary"%>
     <%= link_to 'cancel', tasks_path, class: "btn btn-default" %>
   </div>
