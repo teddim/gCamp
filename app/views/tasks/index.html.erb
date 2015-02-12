@@ -6,7 +6,11 @@
 <table class="table">
   <thead>
     <tr>
-      <th colspan= 2>Description</th>
+      <th class= "col-sm-2">Description</th>
+      <th class= "col-sm-2">Due Date</th>
+      <th>
+
+      </th>
     </tr>
   </thead>
 
@@ -17,6 +21,11 @@
     <% else %>
     <td><%= link_to task.description, task %></td>
     <% end %>
+    <td>
+      <% if task.due_date %>
+        <%= task.due_date.strftime("%m/%d/%Y") %>
+        <% end %>
+    </td>
     <td class="text-right">
       <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
       <%= link_to 'Delete', task, method: :delete, class: "btn btn-danger" %>
