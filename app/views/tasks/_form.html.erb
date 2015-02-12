@@ -18,13 +18,13 @@
   </div>
 
   <div class= "form-group">
-    <div class="row col-sm-6 col-sm-offset-2">
+    <div class="col-sm-6 col-sm-offset-2">
       <% if @page_name != "New" %>
       <p><%= t.check_box :complete %> Complete</p>
       <% end %>
     </div>
 
-    <div class="row col-sm-6 col-sm-offset-2 extra-padding">
+    <div class="col-sm-6 col-sm-offset-2 extra-padding">
       <%= t.submit class: "btn btn-primary"%>
       <%= link_to 'cancel', tasks_path, class: "btn btn-default" %>
     </div>
