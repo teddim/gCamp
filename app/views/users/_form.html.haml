@@ -25,3 +25,7 @@
     .col-sm-6.col-sm-offset-2
       = u.submit name_of_button, class: "btn btn-primary"
       = link_to 'cancel', users_path, class: "btn btn-default"
+      - if name_of_button == "Update User"
+        = link_to 'Delete', @user, method: :delete, class: "btn btn-danger"
+      - else
+        -
