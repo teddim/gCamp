@@ -15,12 +15,10 @@
   </thead>
 
   <% @tasks.each do |task| %>
+
   <tr>
-    <% if task.complete %>
-      <td><s><%= link_to task.description, task %></s></td>
-    <% else %>
-    <td><%= link_to task.description, task %></td>
-    <% end %>
+    <% task.complete ? this_class = 'strikethrough' : custom_class =''  %>
+      <td class = <%= this_class %> ><%= link_to task.description, task %></td>
     <td>
       <% if task.due_date %>
         <%= task.due_date.strftime("%m/%d/%Y") %>

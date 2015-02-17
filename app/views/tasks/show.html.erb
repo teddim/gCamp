@@ -1,10 +1,10 @@
 <div class="page-header">
   <%= link_to "Edit", edit_task_path, class: "btn btn-info pull-right" %>
-  <% if @task.complete %>
-    <h1><s><%= @task.description.downcase.titleize %></s></h1>
-  <% else %>
-    <h1><%= @task.description.downcase.titleize %></h1>
-  <% end %>
+
+  <% @task.complete ? this_class = 'strikethrough' : custom_class =''  %>
+
+    <h1 class = <%= this_class %> ><%= @task.description.downcase.titleize %></h1>
+
 </div>
 
 <ol class="breadcrumb">
