@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     project = Project.new(project_params)
     project.save
     flash[:notice] = "Project was successfully created"
-    redirect_to projects_path
+    redirect_to project_path(project)
   end
 
   def edit
