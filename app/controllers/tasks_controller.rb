@@ -11,11 +11,15 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(task_params)
-    task.save
-    flash[:notice] = "Task was successfully created."
-    redirect_to task_path(task)
-    # , {:notice => "You have successfully created it."}
+    @task = Task.new(task_params)
+    if @task.save
+
+      redirect_to task_path(@task), notice: "Task was successfully created."
+      # , {:notice => "You have successfully created it."}
+    else
+      @page_name = "New"
+      render :new
+    end
   end
 
   def edit
@@ -25,10 +29,12 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+
     if @task.update(task_params)
       flash[:notice] = "Task was successfully updated."
       redirect_to task_path(@task)
     else
+      @page_name = "Edit"
       render :edit
     end
   end
