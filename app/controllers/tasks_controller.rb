@@ -7,17 +7,16 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    @page_name = "New"
+    @page_name = "New Task"
   end
 
   def create
     @task = Task.new(task_params)
     if @task.save
-
       redirect_to task_path(@task), notice: "Task was successfully created."
       # , {:notice => "You have successfully created it."}
     else
-      @page_name = "New"
+      @page_name = "New Task"
       render :new
     end
   end

@@ -1,28 +1,37 @@
 %ol.breadcrumb
   %li
     = link_to 'Tasks', tasks_path
-    -if @task[:description] != nil
+    -if @task[:description] != nil && @page_name == "Edit"
       %li
-        = link_to @task.description_was, task_path(@task)
+        = link_to @task.description, task_path(@task)
+        -# = link_to @task.description_was, task_path(@task)
 
   %li.active
     = @page_name
-    Task
 
 - if @task.errors.any?
-  - @task.errors.full_messages.each do |error|
-    = error
+  .row
+    .col-sm-2
+    .col-sm-7
+      .alert.alert-danger
+        %h3
+          = pluralize(@task.errors.count, "error")
+          prohibited this form from being saved:
+        - @task.errors.full_messages.each do |error|
+          %li
+            = error
+    .col-sm-3
 
 = form_for(@task, html: { class: "form-horizontal" }) do |t|
   .row.form-group
-    .col-sm-2
+    .col-sm-2.text-right
       = t.label :description, class:"control-label"
     .col-sm-6
       = t.text_field :description, class:"form-control"
     .col-sm-4
 
   .form-group
-    .col-sm-2
+    .col-sm-2.text-right
       = t.label :due_date, class:"control-label"
     .col-sm-4
       = t.date_field :due_date, class:"form-control"
@@ -31,7 +40,7 @@
 
   .form-group
     .col-sm-6.col-sm-offset-2
-      -if @page_name != "New"
+      -if @page_name != "New Task"
         %p
           = t.check_box :complete
           Complete
