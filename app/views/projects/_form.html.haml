@@ -7,8 +7,9 @@
           = pluralize(@project.errors.count, "error")
           prohibited this form from being saved:
         - @project.errors.full_messages.each do |error|
-          %li
-            = error
+          %ul
+            %li
+              = error
     .col-sm-3
 
 = form_for(@project, html: { class: "form-horizontal" }) do |proj|
