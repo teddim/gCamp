@@ -9,19 +9,7 @@
   %li.active
     = @page_name
 
-- if @task.errors.any?
-  .row
-    .col-sm-2
-    .col-sm-7
-      .alert.alert-danger
-        %h3
-          = pluralize(@task.errors.count, "error")
-          prohibited this form from being saved:
-        - @task.errors.full_messages.each do |error|
-          %ul
-            %li
-              = error
-    .col-sm-3
+= render partial: "shared/error", locals: {object: @task}
 
 = form_for(@task, html: { class: "form-horizontal" }) do |t|
   .row.form-group
