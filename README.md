@@ -1,4 +1,5 @@
 ![](https://travis-ci.org/teddim/gCamp.svg?branch=master)
+https://travis-ci.org/teddim/gCamp
 
 == README
 
