@@ -18,6 +18,12 @@
     <div class="alert alert-success"> <%= flash[:notice] %></div>
     <% end %>
 
+    <% if current_user %>
+      <%= link_to 'Sign-out', signout_path %>
+    <% else %>
+      <%= link_to 'Sign-up', signup_path %>
+      <%= link_to 'Sign-in', signin_path %>
+    <% end %>
 
     <%= yield %>
 
@@ -33,7 +39,7 @@
         <%= link_to 'FAQ', faq_path(@faq) %> |
         <%= link_to 'Tasks', tasks_path %> |
         <%= link_to 'Users', users_path %> |
-        <%= link_to 'Projects', projects_path %> 
+        <%= link_to 'Projects', projects_path %>
       </div>
 
       <div class="navbar-right">

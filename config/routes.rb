@@ -8,6 +8,11 @@ Rails.application.routes.draw do
    get '/about' => 'about#index'
    get '/faq' => 'common_questions#index'
 
+   get 'sign-up' => 'registration#new', as: :signup
+   post 'sign-up' => 'registration#create'
+   get 'sign-in' => 'authentication#new', as: :signin
+   post 'sign-in' => 'authentication#create'
+   get 'sign-out' => 'authentication#destroy', as: :signout
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
