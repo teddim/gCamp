@@ -21,7 +21,7 @@
       <td class = <%= this_class %> ><%= link_to task.description, task %></td>
     <td>
       <% if task.due_date %>
-        <%= task.due_date.strftime("%m/%d/%Y") %>
+        <%= task.due_date.strftime("%_m/%d/%Y") %>
         <% end %>
     </td>
     <td class="text-right">
