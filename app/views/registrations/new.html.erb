@@ -1,5 +1,7 @@
 <%= render partial: "shared/error", locals:{object:@user} %>
 
+<h1>Sign up for gCamp!</h1>
+
 <%= form_for @user, url: signup_path do |f| %>
 
   <%= f.label :first_name %>
@@ -20,5 +22,3 @@
   <%= f.submit "Sign Up"%>
 
   <% end %>
-
-  
