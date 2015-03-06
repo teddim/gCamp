@@ -1,24 +1,27 @@
-<%= render partial: "shared/error", locals:{object:@user} %>
+<div class="row form-group">
+  <div class="well col-md-4 col-md-offset-4">
 
-<h1>Sign up for gCamp!</h1>
+  <h3>Sign up for gCamp!</h3>
+  <%= render partial: "shared/error_registration", locals: {object: @user} %>
 
-<%= form_for @user, url: signup_path do |f| %>
+  <%= form_for @user, html: { class: "form-horizontal" }, url: signup_path do |f| %>
 
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
-<br>
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
-<br>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-<br>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-<br>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-<br>
-  <%= f.submit "Sign Up"%>
+    <%= f.label :first_name, class:"control-label" %>
+    <%= f.text_field :first_name, autofocus: true, class:"form-control" %>
 
+    <%= f.label :last_name, class:"control-label" %>
+    <%= f.text_field :last_name, class:"form-control" %>
+
+    <%= f.label :email, class:"control-label" %>
+    <%= f.email_field :email, class:"form-control" %>
+
+    <%= f.label :password, class:"control-label" %>
+    <%= f.password_field :password, class:"form-control" %>
+
+    <%= f.label :password_confirmation, class:"control-label" %>
+    <%= f.password_field :password_confirmation, class:"form-control" %>
+<br>
+    <%= f.submit "Sign Up", class:"btn btn-primary"%>
+    </div>
+</div>
   <% end %>

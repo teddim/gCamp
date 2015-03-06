@@ -1,0 +1,5 @@
+- if object.errors.any?
+  .text-danger
+    - object.errors.full_messages.each do |error|
+      %div
+        = error
