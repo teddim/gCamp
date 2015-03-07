@@ -1,6 +1,12 @@
 require 'rails_helper'
 
+
 feature 'Users CRUD Happy Path-' do
+
+  before do
+    login
+  end
+
   scenario 'CREATE: User can create a new user' do
     visit users_path
     click_on 'New User'
@@ -14,13 +20,8 @@ feature 'Users CRUD Happy Path-' do
     expect(page).to have_content('t@t.com')
   end
 
-  scenario 'READ: User can see a user on the index page' do
-    User.create!(
-    first_name: 'Tester',
-    last_name:'Test',
-    email: 't@t.com',
-    password: 'test'
-    )
+  xscenario 'READ: User can see a user on the index page' do
+    login
     visit users_path
     # within(".h1.page-header") do
     #   expect(page).to have_content('Users')
@@ -30,13 +31,8 @@ feature 'Users CRUD Happy Path-' do
     expect(page).to have_content('t@t.com')
   end
 
-  scenario 'READ: User can view a single user on the show page' do
-    User.create!(
-    first_name: 'Tester',
-    last_name:'Test',
-    email: 't@t.com',
-    password: 'test'
-    )
+  xscenario 'READ: User can view a single user on the show page' do
+    login
     visit users_path
     click_on 'Tester'
 
@@ -46,10 +42,9 @@ feature 'Users CRUD Happy Path-' do
     expect(page).to have_content('Tester')
     expect(page).to have_content('Test')
     expect(page).to have_content('t@t.com')
-
   end
 
-  scenario 'UPDATE: User can update a user' do
+  xscenario 'UPDATE: User can update a user' do
     User.create!(
     first_name: 'Tester',
     last_name:'Test',
@@ -67,7 +62,7 @@ feature 'Users CRUD Happy Path-' do
     expect(page).to have_content('t2@t.com')
   end
 
-  scenario 'DELETE: User can delete a user' do
+  xscenario 'DELETE: User can delete a user' do
     User.create!(
     first_name: 'Tester',
     last_name:'Test',
@@ -86,7 +81,7 @@ end
 
 feature "Users CRUD validation:" do
 
-  scenario 'User can\'t create a new user without entering required data' do
+  xscenario 'User can\'t create a new user without entering required data' do
     visit users_path
     click_on 'New User'
     click_on 'Create User'
