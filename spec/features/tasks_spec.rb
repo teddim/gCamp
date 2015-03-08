@@ -68,7 +68,7 @@ feature "Tasks CRUD validation:" do
 
   end
 
-  scenario 'User can\'t create update a task to have an empty description' do
+  scenario 'User can\'t update a task to have an empty description' do
     create_task
     login
     visit tasks_path

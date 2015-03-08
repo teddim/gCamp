@@ -14,3 +14,9 @@ def create_task(overrides={})
       due_date: 20150303
     }.merge(overrides))
 end
+
+def create_project(overrides={})
+    Project.create!({
+      name: 'My project for today',
+    }.merge(overrides))
+end
