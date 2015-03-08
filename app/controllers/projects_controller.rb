@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     if @project.update(project_params)
       flash[:notice] = "Project was successfully updated"
-      redirect_to project_path(project)
+      redirect_to project_path(@project)
     else
       render :edit
     end
