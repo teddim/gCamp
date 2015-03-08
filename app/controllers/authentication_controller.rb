@@ -8,7 +8,7 @@ class AuthenticationController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:notice] = "You have successfully signed up"
+      flash[:notice] = "You have successfully signed in"
       redirect_to root_path
     else
       flash[:error] = "Email / Password combination is invalid"
