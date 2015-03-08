@@ -22,14 +22,14 @@
   .form-group
     = u.label :password, class:"control-label col-sm-2"
     .col-sm-6
-      = u.email_field :password, class:"form-control"
+      = u.password_field :password, class:"form-control"
     .col-sm-2
 
   - if name_of_button == "Create User"
     .form-group
       = u.label :password_confirmation, class:"control-label col-sm-2"
       .col-sm-6
-        = u.email_field :password_confirmation, class:"form-control"
+        = u.password_field :password_confirmation, class:"form-control"
       .col-sm-2
 
   .form-group

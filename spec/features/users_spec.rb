@@ -8,14 +8,13 @@ feature 'Users CRUD Happy Path-' do
   end
 
   scenario 'CREATE: User can create a new user' do
-  #pending until User page is updated with password field entry
     visit users_path
     click_on 'New User'
     fill_in 'First name', with: 'Tester2'
     fill_in 'Last name', with: 'Test2'
     fill_in 'Email', with: 't@t2.com'
     fill_in 'Password', with: 'test'
-    fill_in 'Password Confirmation', with: 'test'
+    fill_in 'Password confirmation', with: 'test'
 
     click_on 'Create User'
     expect(page).to have_content('Tester2')
