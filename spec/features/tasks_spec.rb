@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 feature 'Tasks CRUD Happy Path-' do
+
+  before(:each) do
+    login
+  end
+
   scenario 'CREATE: User can create a new task' do
     visit tasks_path
     click_on 'New Task'
@@ -13,20 +18,16 @@ feature 'Tasks CRUD Happy Path-' do
   end
 
   scenario 'READ: User can see a task on the index page' do
-    Task.create!(
-      description: 'My task for today',
-      due_date: 20150303
-    )
+    task = create_task
     visit tasks_path
     expect(page).to have_content('My task for today')
     expect(page).to have_content('3/03/2015')
+    expect(find_link('Edit')[:href]).to eq(edit_task_path(task))
+    expect(find_link('Delete')[:href]).to eq(task_path(task))
   end
 
   scenario 'READ: User can view a single task on the show page' do
-    Task.create!(
-      description: 'My task for today',
-      due_date: 20150303
-    )
+    create_task
     visit tasks_path
     click_on 'My task for today'
     expect(page).to have_content('My task for today')
@@ -34,10 +35,7 @@ feature 'Tasks CRUD Happy Path-' do
   end
 
   scenario 'UPDATE: User can update a task' do
-    Task.create!(
-      description: 'My task for today',
-      due_date: 20150303
-    )
+    create_task
     visit tasks_path
     click_on 'Edit'
     fill_in 'Description', with: 'My edited task'
@@ -48,10 +46,7 @@ feature 'Tasks CRUD Happy Path-' do
   end
 
   scenario 'DELETE: User can delete a task' do
-    Task.create!(
-      description: 'My task for today',
-      due_date: 20150303
-    )
+    create_task
     visit tasks_path
     click_on 'Delete'
     expect(page).to have_no_content('My task for today')
@@ -63,9 +58,26 @@ end
 feature "Tasks CRUD validation:" do
 
   scenario 'User can\'t create a new task without a description' do
+    login
     visit tasks_path
     click_on 'New Task'
     click_on 'Create Task'
     expect(page).to have_content(/prohibited this form from being saved/)
+    click_on 'Cancel'
+    expect(current_path).to eq tasks_path
+
+  end
+
+  scenario 'User can\'t create update a task to have an empty description' do
+    create_task
+    login
+    visit tasks_path
+    click_on 'Edit'
+    fill_in 'Description', with: ''
+    click_on 'Update Task'
+    expect(page).to have_content(/prohibited this form from being saved/)
+    click_on 'Cancel'
+    expect(current_path).to eq tasks_path
+    expect(page).to have_content('My task for today')
   end
 end
