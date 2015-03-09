@@ -1,0 +1,18 @@
+.row.form-group
+  .well.col-md-4.col-md-offset-4
+    %h3.page-header Sign into gCamp
+    .text-danger
+      = flash[:error]
+    .col-md-12
+      = form_tag signin_path, method: :post, :class => "form-horizontal", :role => 'form' do
+        .form-group
+          = label_tag :email, nil, class: "control-label"
+          .col-md-12
+          = text_field_tag :email, nil, autofocus: true, class: "form-control"
+        .form-group
+          = label_tag :password, nil, class: "control-label"
+          .col-md-12
+          = password_field_tag :password, nil, class: "form-control"
+        .form-group
+          .col-md-12
+          = submit_tag 'Sign in', class: 'btn btn-primary'
