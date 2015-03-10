@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @page_name = "New"
   end
 
   def create
@@ -17,12 +18,14 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Project was successfully created"
       redirect_to project_path(@project)
     else
+      @page_name = "New"
       render :new
     end
   end
 
   def edit
     @project = Project.find(params[:id])
+    @page_name = "Edit"
   end
 
   def update
@@ -31,6 +34,7 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Project was successfully updated"
       redirect_to project_path(@project)
     else
+      @page_name = "Edit"
       render :edit
     end
   end
