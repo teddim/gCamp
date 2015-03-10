@@ -1,22 +1,22 @@
 class TasksController < ApplicationController
 
   before_action :authenticate_user
-
+  before_action :find_project
+  
   def index
-    @tasks = Task.all
-    @tasks = @tasks.order(:id)
+    @tasks = @project.tasks.order(:id)
+
   end
 
   def new
-    @task = Task.new
+    @task = @project.tasks.new
     @page_name = "New Task"
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = @project.tasks.new(task_params)
     if @task.save
-      redirect_to task_path(@task), notice: "Task was successfully created."
-      # , {:notice => "You have successfully created it."}
+      redirect_to project_task_path(@project, @task), notice: "Task was successfully created."
     else
       @page_name = "New Task"
       render :new
@@ -24,16 +24,16 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = @project.tasks.find(params[:id])
     @page_name = "Edit"
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = @project.tasks.find(params[:id])
 
     if @task.update(task_params)
       flash[:notice] = "Task was successfully updated."
-      redirect_to task_path(@task)
+      redirect_to project_task_path(@project,@task[:id])
     else
       @page_name = "Edit"
       render :edit
@@ -41,19 +41,23 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
+    @task = @project.tasks.find(params[:id])
   end
 
   def destroy
-    task = Task.find(params[:id])
+    task = @project.tasks.find(params[:id])
     if task.destroy
       flash[:notice] = "Task was successfully deleted."
-      redirect_to tasks_path
+      redirect_to project_tasks_path
     end
   end
 
 
   private
+
+  def find_project
+    @project = Project.find(params[:project_id])
+  end
 
   def task_params
     params.require(:task).permit(:description, :complete, :due_date)

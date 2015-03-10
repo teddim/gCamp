@@ -1,15 +1,14 @@
 <div class="page-header">
-  <%= link_to "Edit", edit_task_path, class: "btn btn-info pull-right" %>
-
+  <%= link_to "Edit", edit_project_task_path(@task.project,@task), class: "btn btn-info pull-right" %>
   <% @task.complete ? this_class = 'strikethrough' : custom_class =''  %>
-
-    <h1 class = <%= this_class %> ><%= @task.description.downcase.titleize %></h1>
-
+  <h1 class = <%= this_class %> ><%= @task.description.downcase.titleize %></h1>
 </div>
 
 <ol class="breadcrumb">
-  <li><%= link_to 'Tasks', tasks_path %></li>
-  <li class="active"><%= @task.description %></li>
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li><%= link_to @project.name, project_path(@project) %></li>
+  <li><%= link_to 'Tasks', project_tasks_path %></li>
+  <li class= "Active"> <%= @task.description %> </li>
 </ol>
 
 <strong>Due On</strong>:

@@ -16,5 +16,5 @@
 </ol>
 
 <div class="">
-  <%= link_to pluralize(@project.tasks.count,"Task"), project_tasks_path(@project[:id]) %>
+  <%= link_to pluralize(@project.tasks.count,"Task"), project_tasks_path(@project) %>
 </div>

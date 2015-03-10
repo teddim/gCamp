@@ -1,7 +1,13 @@
 <div class="page-header">
-  <%= link_to "New Task", new_task_path, class: "btn btn-info pull-right" %>
-  <h1>Listing Tasks</h1>
+  <%= link_to "New Task", new_project_task_path, class: "btn btn-info pull-right" %>
+  <h1>Tasks for <%= @project.name %></h1>
 </div>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li><%= link_to @project.name, project_path(@project) %></li>
+  <li class= "Active">Tasks</li>
+</ol>
 
 <table class="table">
   <thead>
@@ -13,21 +19,19 @@
       </th>
     </tr>
   </thead>
-
   <% @tasks.each do |task| %>
-
-  <tr>
-    <% task.complete ? this_class = 'strikethrough' : custom_class =''  %>
-      <td class = <%= this_class %> ><%= link_to task.description, task %></td>
-    <td>
-      <% if task.due_date %>
-        <%= task.due_date.strftime("%_m/%d/%Y") %>
+    <tr>
+      <% task.complete ? this_class = 'strikethrough' : custom_class =''  %>
+      <td class = <%= this_class %> ><%= link_to task.description, project_task_path(task.project,task) %></td>
+      <td>
+        <% if task.due_date %>
+          <%= task.due_date.strftime("%_m/%d/%Y") %>
         <% end %>
-    </td>
-    <td class="text-right">
-      <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
-      <%= link_to 'Delete', task, method: :delete, class: "btn btn-danger" %>
-    </td>
-  </tr>
+      </td>
+      <td class="text-right">
+        <%= link_to 'Edit', edit_project_task_path(task.project,task), class: "btn btn-info" %>
+        <%= link_to 'Delete', project_task_path(task.project,task), method: :delete, class: "btn btn-danger" %>
+      </td>
+    </tr>
   <% end %>
 </table>
