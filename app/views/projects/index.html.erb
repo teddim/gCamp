@@ -7,8 +7,8 @@
     <thead>
       <tr>
         <th class= "col-sm-3">Name</th>
-        <th class= "col-sm-2"> </th>
-        <th></th>
+        <th class= "col-sm-5"> </th>
+        <th class= "col-sm-4">Tasks</th>
       </tr>
     </thead>
 
@@ -16,10 +16,9 @@
       <tr>
         <td><%= link_to project.name, project %></td>
         <td>
-
         </td>
-        <td class="text-right">
-    
+        <td>
+          <%= link_to project.tasks.count.to_s, project_tasks_path(project) %>
         </td>
     </tr>
     <% end %>
