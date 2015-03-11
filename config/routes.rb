@@ -25,8 +25,9 @@ Rails.application.routes.draw do
   resources :users, :projects
 
   resources :projects do
-    resources :tasks
+    resources :tasks, :memberships
   end
+
 
   # Example resource route with options:
   #   resources :products do
