@@ -5,5 +5,10 @@ def login(user = create_user)
   within("form") do
     click_button 'Sign in'
   end
+end
 
+def goto_project_tasks
+  @task = create_task
+  @project = @task.project
+  visit project_tasks_path(@project,@task)
 end

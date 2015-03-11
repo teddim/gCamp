@@ -9,10 +9,12 @@ def create_user(overrides={})
 end
 
 def create_task(overrides={})
-    Task.create!({
-      description: 'My task for today',
-      due_date: 20150303
-    }.merge(overrides))
+  project = create_project
+  Task.create!({
+    description: 'My task for today',
+    due_date: 20150303,
+    project_id: project.id
+  }.merge(overrides))
 end
 
 def create_project(overrides={})
