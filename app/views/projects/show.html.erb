@@ -12,9 +12,13 @@
 <ol class="breadcrumb">
   <li><%= link_to 'Projects', projects_path %></li>
   <li class="Active"><%= @project.name %></li>
-
 </ol>
 
 <div class="">
-  <%= link_to pluralize(@project.tasks.count,"Task"), project_tasks_path(@project) %>
+  <ul class="list-unstyled">
+     <li><%= link_to pluralize(@project.tasks.count,"Task"), project_tasks_path(@project) %></li>
+     <li><%= link_to pluralize(@project.memberships.count,"Membership"), project_memberships_path(@project) %></li>
+  </ul>
+
+
 </div>

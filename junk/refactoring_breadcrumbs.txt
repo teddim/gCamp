@@ -1,0 +1,61 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Projects', projects_path
+    -# -if @page_name == "New"
+  %li.active
+    = "New Project"
+
+
+    -# -if @page_name == "Edit"
+    -#   %li
+    -#     = link_to @project.name_was, project_path(@project)
+    -#   %li
+    -#     = "Edit"
+
+<%= breadcrumb([link_to('Projects', projects_path), 'New Project']) %>
+
+def breadcrumb(lineage_array)
+  output = ''
+  lineage_array.each.with_index do |piece_of_lineage, index|
+    active_class = index == lineage_array.length - 1 ? 'active' : ''
+    output += "<li class=\"#{active_class}\">#{piece_of_lineage.html_safe}</li>"
+  end
+  return output
+end
+
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li><%= link_to @project.name, project_path(@project) %></li>
+  <li class= "Active">Memberships</li>
+</ol>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li class="Active"><%= @project.name %></li>
+</ol>
+
+%ol.breadcrumb
+  %li= link_to 'Projects', projects_path
+  %li= link_to @project.name, project_path(@project)
+  %li= link_to 'Tasks', project_tasks_path
+  -if @task[:description] != nil && @page_name == "Edit"
+    %li
+      = link_to @task.description_was, project_task_path(@task.project,@task)
+  %li.Active
+    = @page_name
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li><%= link_to @project.name, project_path(@project) %></li>
+  <li class= "Active">Tasks</li>
+</ol>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li><%= link_to @project.name, project_path(@project) %></li>
+  <li><%= link_to 'Tasks', project_tasks_path %></li>
+  <li class= "Active"> <%= @task.description %> </li>
+</ol>
+
+%ol.breadcrumb

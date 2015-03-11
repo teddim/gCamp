@@ -1,20 +1,19 @@
-Projects Memberships
 <div class="page-header">
-  <%= link_to "New Task", new_project_membership_path, class: "btn btn-info pull-right" %>
-  <h1>Tasks for <%= @project.name %></h1>
+  <%= link_to "New Memberships", new_project_membership_path, class: "btn btn-info pull-right" %>
+  <h1><%= @project.name %>: Manage Members</h1>
 </div>
 
 <ol class="breadcrumb">
   <li><%= link_to 'Projects', projects_path %></li>
   <li><%= link_to @project.name, project_path(@project) %></li>
-  <li class= "Active">Tasks</li>
+  <li class= "Active">Memberships</li>
 </ol>
 
 <table class="table">
   <thead>
     <tr>
-      <th class= "col-sm-3">Description</th>
-      <th class= "col-sm-2">Due On</th>
+      <th class= "col-sm-3">Role</th>
+      <th class= "col-sm-2"></th>
       <th>
 
       </th>
@@ -22,12 +21,9 @@ Projects Memberships
   </thead>
   <% @memberships.each do |membership| %>
     <tr>
-      <% membership.complete ? this_class = 'strikethrough' : custom_class =''  %>
-      <td class = <%= this_class %> ><%= link_to membership.description, project_membership_path(membership.project,membership) %></td>
+      <td class = <%= this_class %> ><%= link_to membership.role, project_membership_path(membership.project,membership) %></td>
       <td>
-        <% if membership.due_date %>
-          <%= membership.due_date.strftime("%_m/%d/%Y") %>
-        <% end %>
+
       </td>
       <td class="text-right">
         <%= link_to 'Edit', edit_project_membership_path(membership.project,membership), class: "btn btn-info" %>
