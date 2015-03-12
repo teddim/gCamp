@@ -1,5 +1,4 @@
 <div class="page-header">
-  <%= link_to "New Memberships", new_project_membership_path, class: "btn btn-info pull-right" %>
   <h1><%= @project.name %>: Manage Members</h1>
 </div>
 
@@ -9,26 +8,14 @@
   <li class= "Active">Memberships</li>
 </ol>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th class= "col-sm-3">Role</th>
-      <th class= "col-sm-2"></th>
-      <th>
+<div class="well">
+  <%= form_for [@project,@membership],:html => {:class => "form-inline"} do |f| %>
 
-      </th>
-    </tr>
-  </thead>
-  <% @memberships.each do |membership| %>
-    <tr>
-      <td class = <%= this_class %> ><%= link_to membership.role, project_membership_path(membership.project,membership) %></td>
-      <td>
+  <div class="form-group">
+    <%= f.collection_select(:user_id,User.all, :id, :full_name, {prompt: 'Please select a user'}, {class: 'form-control'}) %>
+    <%= f.collection_select(:role,Membership.all, to_s, to_s,{}, {class: 'form-control'}) %>
+    <%= f.submit "Add New Member", class: "btn btn-primary" %>
+  </div>
 
-      </td>
-      <td class="text-right">
-        <%= link_to 'Edit', edit_project_membership_path(membership.project,membership), class: "btn btn-info" %>
-        <%= link_to 'Delete', project_membership_path(membership.project,membership), method: :delete, class: "btn btn-danger" %>
-      </td>
-    </tr>
   <% end %>
-</table>
+</div>

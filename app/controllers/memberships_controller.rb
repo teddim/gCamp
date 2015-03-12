@@ -2,19 +2,20 @@ class MembershipsController <ApplicationController
 
   before_action :authenticate_user
   before_action :find_project
+  before_action :find_user
 
   def index
-    @memberships = @project.memberships
-
+    @membership = @project.memberships.new
   end
 
-  # def new
-  #
-  # end
-  #
-  # def create
-  #
-  # end
+  def create
+    @membership = @project.memberships.new(membership_params)
+    if @membership.save
+      @user = @membership.user.full_name
+      flash[:notice] = "#{@user} was successfully added"
+      redirect_to project_memberships_path(@project)
+    end
+  end
   #
   # def edit
   #
@@ -34,7 +35,11 @@ class MembershipsController <ApplicationController
     @project = Project.find(params[:project_id])
   end
 
+  def find_user
+    @user = Project.find(params[:project_id])
+  end
+
   def membership_params
-    params.require(:membership).permit(:role)
+    params.require(:membership).permit(:role, :project_id, :user_id)
   end
 end
