@@ -1,6 +1,6 @@
 - if object.errors.any?
   .row
-    .col-sm-7
+    .col-md-7
       .alert.alert-danger
         %h3
           = pluralize(object.errors.count, "error")
@@ -9,4 +9,4 @@
           %ul
             %li
               = error
-    .col-sm-3
+    .col-md-3

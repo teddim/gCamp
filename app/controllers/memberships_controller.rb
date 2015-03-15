@@ -21,11 +21,7 @@ class MembershipsController <ApplicationController
       render 'index'
     end
   end
-  #
-  # def edit
-  #
-  # end
-  #
+
   def update
     @membership = @project.memberships.find(params[:id])
     if @membership.update(membership_params)
