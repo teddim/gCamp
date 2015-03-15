@@ -2,7 +2,7 @@ class TasksController < ApplicationController
 
   before_action :authenticate_user
   before_action :find_project
-  
+
   def index
     @tasks = @project.tasks.order(:id)
 
@@ -42,6 +42,8 @@ class TasksController < ApplicationController
 
   def show
     @task = @project.tasks.find(params[:id])
+    @comments = @task.comments.all
+    @comment = @task.comments.new
   end
 
   def destroy
