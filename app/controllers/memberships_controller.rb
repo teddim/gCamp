@@ -39,7 +39,7 @@ class MembershipsController <ApplicationController
     membership = @project.memberships.find(params[:id])
     membership.destroy
     @user = membership.user.full_name
-    flash[:notice] = "#{@user} was successfully deleted"
+    flash[:notice] = "#{@user} was successfully removed"
     redirect_to project_memberships_path(@project)
   end
 
