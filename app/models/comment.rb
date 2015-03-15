@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
-  validates :content, :task_id, :user_id, presence: true
+  validates :content, presence: true
   belongs_to :task
   belongs_to :user
 

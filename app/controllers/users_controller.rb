@@ -43,6 +43,9 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
+    user.comments.each do |comment|
+      user.set_comment_user_id_to_nil(comment)
+    end
     if user.destroy
       flash[:notice] = "User was successfully deleted"
       redirect_to users_path
