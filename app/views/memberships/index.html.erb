@@ -9,13 +9,28 @@
 </ol>
 
 <div class="well">
-  <%= form_for [@project,@membership],:html => {:class => "form-inline"} do |f| %>
-
-  <div class="form-group">
-    <%= f.collection_select(:user_id,User.all, :id, :full_name, {prompt: 'Please select a user'}, {class: 'form-control'}) %>
-    <%= f.collection_select(:role,Membership.all, to_s, to_s,{}, {class: 'form-control'}) %>
-    <%= f.submit "Add New Member", class: "btn btn-primary" %>
-  </div>
-
+  <%= form_for [@project,@new_membership],:html => {:class => "form-inline"} do |f| %>
+    <div class="form-group">
+      <%= f.collection_select(:user_id,User.all, :id, :full_name, {prompt: 'Please select a user'}, {class: 'form-control'}) %>
+      <%= f.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class: 'form-control'}) %>
+      <%= f.submit "Add New Member", class: "btn btn-primary" %>
+    </div>
   <% end %>
+</div>
+
+<div class = "row">
+<% @memberships.each do |membership| %>
+  <div class="form-group col-md-12">
+    <%= form_for [@project,membership] do |ed| %>
+    <div>
+      <div><%= link_to "#{membership.user.full_name}", user_path(membership.user), class: "col-md-2" %></div>
+      <div class="col-md-3"><%= ed.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class:'form-control'}) %></div>
+      <div class="col-md-3">
+        <%= ed.submit "Update", class: "btn btn-primary" %>
+        <%= link_to "", project_membership_path(@project,membership), method: :delete, class: "glyphicon glyphicon-remove" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+<% end %>
 </div>

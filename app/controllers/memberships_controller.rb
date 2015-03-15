@@ -5,7 +5,9 @@ class MembershipsController <ApplicationController
   before_action :find_user
 
   def index
-    @membership = @project.memberships.new
+    @new_membership = Membership.new
+    @memberships = @project.memberships.all.order(:role)
+
   end
 
   def create
@@ -21,13 +23,20 @@ class MembershipsController <ApplicationController
   #
   # end
   #
-  # def  update
-  #
-  # end
-  #
-  # def destroy
-  #
-  # end
+  def update
+    @membership = @project.memberships.find(params[:id])
+    if @membership.update(membership_params)
+      flash[:notice] = "#{@user} was successfully updated"
+      redirect_to project_memberships_path(@project)
+    end
+  end
+
+  def destroy
+    membership = @project.memberships.find(params[:id])
+    membership.destroy
+    flash[:notice] = "#{@user} was successfully deleted"
+    redirect_to project_memberships_path
+  end
 
   private
 
