@@ -10,10 +10,10 @@
 
 <%= render partial: "shared/error", locals: {object: @membership} %>
 
-<div class="well">
+<div class="well col-md-7">
   <%= form_for [@project,@membership],:html => {:class => "form-inline"} do |f| %>
     <div class="form-group">
-      <%= f.collection_select(:user_id,User.all, :id, :full_name, {prompt: 'Please select a user'}, {class: 'form-control'}) %>
+      <%= f.collection_select(:user_id,User.all, :id, :full_name, {prompt: 'Please select a user...'}, {class: 'form-control'}) %>
       <%= f.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class: 'form-control'}) %>
       <%= f.submit "Add New Member", class: "btn btn-primary" %>
     </div>
@@ -26,9 +26,11 @@
     <%= form_for [@project,membership] do |ed| %>
     <div>
       <div><%= link_to "#{membership.user.full_name}", user_path(membership.user), class: "col-md-2" %></div>
-      <div class="col-md-3"><%= ed.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class:'form-control'}) %></div>
-      <div class="col-md-3">
+      <div class="col-md-2"><%= ed.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class:'form-control'}) %></div>
+      <div class="col-md-2">
         <%= ed.submit "Update", class: "btn btn-primary" %>
+      </div>
+      <div class= "col-md-2">
         <%= link_to "", project_membership_path(@project,membership), method: :delete, class: "glyphicon glyphicon-remove" %>
       </div>
     </div>
