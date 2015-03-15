@@ -34,6 +34,8 @@ feature 'Tasks CRUD Happy Path-' do
     click_on 'Edit'
     fill_in 'Description', with: 'My edited task'
     fill_in 'Due date', with: '25/03/2015'
+    expect(page).to have_content('Complete')
+    #check 'Complete'
     click_on 'Update'
     expect(page).to have_content('My edited task')
     expect(page).to have_content('3/25/2015')
