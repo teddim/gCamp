@@ -22,7 +22,10 @@
   <% @tasks.each do |task| %>
     <tr>
       <% task.complete ? this_class = 'strikethrough' : custom_class =''  %>
-      <td class = <%= this_class %> ><%= link_to task.description, project_task_path(task.project,task) %></td>
+      <td class = <%= this_class %> >
+        <%= link_to task.description, project_task_path(task.project,task) %>
+        <div class="badge"> <%= task.comments.count %> </div>
+      </td>
       <td>
         <% if task.due_date %>
           <%= task.due_date.strftime("%_m/%d/%Y") %>
@@ -30,7 +33,7 @@
       </td>
       <td class="text-right">
         <%= link_to 'Edit', edit_project_task_path(task.project,task), class: "btn btn-info" %>
-        <%= link_to 'Delete', project_task_path(task.project,task), method: :delete, class: "btn btn-danger" %>
+        <%= link_to '', project_task_path(task.project,task), method: :delete, class: "glyphicon glyphicon-remove" %>
       </td>
     </tr>
   <% end %>
