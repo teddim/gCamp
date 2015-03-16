@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   end
 
   def set_comment_user_id_to_nil(comment)
-binding.pry
     comment.user_id = nil
   end
 end
