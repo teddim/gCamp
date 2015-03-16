@@ -3,7 +3,6 @@
     <%= @project.name %>
   <div class="pull-right">
     <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-info" %>
-    <%= link_to 'Delete', @project, method: :delete, class: "btn btn-danger" %>
   </div>
   </h1>
 
@@ -14,11 +13,22 @@
   <li class="Active"><%= @project.name %></li>
 </ol>
 
-<div class="">
+<div>
   <ul class="list-unstyled">
      <li><%= link_to pluralize(@project.tasks.count,"Task"), project_tasks_path(@project) %></li>
      <li><%= link_to pluralize(@project.memberships.count,"Membership"), project_memberships_path(@project) %></li>
   </ul>
 
-
 </div>
+  <div class="well">
+    <h4>Delete Project</h4>
+    <div>
+      <p>
+      Deleting this project will also delete <%= pluralize(@project.memberships.count,"membership") %>,
+      <%= pluralize(@project.tasks.count,"task") %> and associated comments.
+      </p>
+    </div>
+    <div>
+      <%= link_to 'Delete', @project, method: :delete, class: "btn btn-danger" %>
+    </div>
+  </div>
