@@ -8,16 +8,20 @@
   <li class= "Active">Memberships</li>
 </ol>
 
-<%= render partial: "shared/error", locals: {object: @membership} %>
-
-<div class="well col-md-7">
-  <%= form_for [@project,@membership],:html => {:class => "form-inline"} do |f| %>
-    <div class="form-group">
-      <%= f.collection_select(:user_id,User.all, :id, :full_name, {prompt: 'Please select a user...'}, {class: 'form-control'}) %>
-      <%= f.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class: 'form-control'}) %>
-      <%= f.submit "Add New Member", class: "btn btn-primary" %>
+<%= render partial: "shared/error_left", locals: {object: @membership} %>
+<div class="row">
+  <div class="col-md-7">
+    <div class="well">
+      <%= form_for [@project,@membership],:html => {:class => "form-inline"} do |f| %>
+        <div class="form-group">
+          <%= f.collection_select(:user_id,User.all, :id, :full_name, {prompt: 'Please select a user...'}, {class: 'form-control'}) %>
+          <%= f.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class: 'form-control'}) %>
+          <%= f.submit "Add New Member", class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+
+  </div>
 </div>
 
 <div class = "row">
