@@ -29,6 +29,6 @@
       </p>
     </div>
     <div>
-      <%= link_to 'Delete', @project, method: :delete, class: "btn btn-danger" %>
+      <%= link_to 'Delete', @project, method: :delete,data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
     </div>
   </div>
