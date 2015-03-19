@@ -61,7 +61,7 @@ namespace :rm do
   desc 'Fix orphaned files in memberships and tasks'
     task :orphans => ['rm:memberships_users', 'rm:memberships_proj',
                       'rm:tasks', 'rm:comments', 'rm:user_id_to_nil',
-                      'rm:tasks_nil', 'rm:comments_nil', 'rm:memberships_nil',] do
+                      'rm:tasks_nil', 'rm:comments_nil', 'rm:memberships_nil'] do
 
   end
 end
