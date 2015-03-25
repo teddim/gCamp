@@ -27,7 +27,7 @@ feature 'Sign In -' do
 
     expect(page).to have_content('Tester Test')
     expect(page).to have_content('You have successfully signed in')
-    expect(current_path).to eq root_path
+    expect(current_path).to eq projects_path
   end
 
   scenario 'Guest can\'t sign in without entering required data' do
