@@ -16,7 +16,7 @@ feature 'Sign Up page-' do
     end
     expect(page).to have_content('Tester2 Test2')
     expect(page).to have_content('You have successfully signed up')
-    expect(current_path).to eq root_path
+    expect(current_path).to eq new_project_path
   end
 
   scenario 'User can\'t create a new account without entering required data' do
