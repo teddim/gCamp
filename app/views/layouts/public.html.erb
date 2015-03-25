@@ -10,22 +10,7 @@
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <%= link_to 'gCamp', projects_path, class:"navbar-brand" %>
-        <ul class= "nav navbar-nav">
-          <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-              Projects <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <% current_user.projects.each do |project| %>
-              <li>  <%= link_to project.name, project_path(project)%> </li>
-              <% end %>
-              <li role="presentation" class="divider"></li>
-              <li>  <%= link_to "New Project", new_project_path %> </li>
-            </ul>
-          </li>
-        <li><%= link_to 'Users', users_path %></li>
-        </ul>
+        <%= link_to 'gCamp', root_path, class:"navbar-brand" %>
 
         <% if current_user %>
           <ul class = "nav navbar-nav navbar-right">
@@ -42,26 +27,48 @@
     </nav>
 
     <div class="container">
-      <% if flash[:notice] %>
-        <div class="alert alert-success">
-          <%= flash[:notice] %>
-        </div>
-      <% end %>
-
-      <%= yield %>
+        <% if flash[:notice] %>
+          <div class="alert alert-success">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+          <%= yield %>
     </div>
-
     <div class="container">
       <div class="page-header">
       </div>
+
       <footer class = "container">
-        <div class="navbar-center">
-          <%= link_to 'Home', root_path %> |
+        <div class="navbar-left">
           <%= link_to 'About', about_path(@about) %> |
           <%= link_to 'Terms', terms_path(@terms) %> |
           <%= link_to 'FAQ', faq_path(@faq) %>
+          <% if current_user %>
+            |
+            <%= link_to 'Users', users_path %> |
+            <%= link_to 'Projects', projects_path %>
+          <% end %>
+        </div>
+
+        <div class="navbar-right">
+          <%= link_to "http://www.linkedin.com/in/teddimaull/" do%>
+            <%= image_tag "linkedin.jpg", height:"32" %>
+          <% end %>
+
+          <%= link_to "http://github.com/teddim" do%>
+            <%= image_tag "github.png" , height:"32"  %>
+          <% end %>
+
+          <%= link_to "http://twitter.com/teddimaull" do%>
+            <%= image_tag "twitter.png", height:"32"  %>
+          <% end %>
+
+          <%= link_to "https://students.gschool.it/students/292" do%>
+            <%= image_tag "galvanize.png", height:"32" %>
+          <% end %>
         </div>
       </footer>
     </div>
+
   </body>
 </html>
