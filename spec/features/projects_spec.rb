@@ -8,7 +8,9 @@ feature 'Projects CRUD Happy Path-' do
 
   scenario 'CREATE: User can create a new project' do
     visit projects_path
-    click_on 'New Project'
+
+      click_on 'new project link'
+
     fill_in 'Name', with: 'My project for today'
     click_on 'Create Project'
     expect(page).to have_content('My project for today')
@@ -52,7 +54,7 @@ feature "Projects CRUD validation:" do
   scenario 'User can\'t create a new project without a name' do
     login
     visit projects_path
-    click_on 'New Project'
+    click_on 'new project link'
     click_on 'Create Project'
     expect(page).to have_content(/prohibited this form from being saved/)
     click_on 'Cancel'
