@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :authenticate_user
 
+  before_action :authenticate_user
+
   def current_user
     User.find_by(id: session[:user_id])
   end
@@ -17,5 +19,5 @@ class ApplicationController < ActionController::Base
       redirect_to signin_path
     end
   end
-  
+
 end
