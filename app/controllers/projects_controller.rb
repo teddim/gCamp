@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
 
   before_action :find_project, only: [:show, :update, :destroy, :edit]
   before_action :project_member, only: [:show, :update, :destroy, :edit]
+  before_action :project_owner, only: [ :update, :destroy, :edit]
 
   def index
     @projects = Project.all

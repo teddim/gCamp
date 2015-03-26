@@ -25,4 +25,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_project_owner(project)
+    if self.memberships.where(project_id: project).where(role: "owner").present?
+  # binding.pry
+      return true
+    else
+      false
+    end
+  end
+
 end
