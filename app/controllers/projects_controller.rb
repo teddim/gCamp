@@ -6,12 +6,15 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @membership = Membership.new
     @page_name = "New"
   end
 
   def create
     @project = Project.new(project_params)
     if @project.save
+      @membership = Membership.new(role: "owner", project_id: @project.id, user_id: current_user.id)
+      @membership.save
       flash[:notice] = "Project was successfully created"
       redirect_to project_path(@project)
     else
@@ -51,5 +54,9 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name)
+  end
+
+  def membership_params
+    params.require(:membership).permit(:role, :project_id, :user_id)
   end
 end
