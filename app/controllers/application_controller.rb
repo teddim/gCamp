@@ -5,8 +5,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :authenticate_user
+  helper_method :project_member
 
   before_action :authenticate_user
+
 
   def current_user
     User.find_by(id: session[:user_id])
@@ -18,6 +20,14 @@ class ApplicationController < ActionController::Base
       flash[:error] = "You must sign in"
       redirect_to signin_path
     end
+  end
+
+  def project_member
+    if !(current_user.is_project_member(@project))
+      flash[:error] = "You do not have access to that project"
+      redirect_to projects_path
+    end
+
   end
 
 end

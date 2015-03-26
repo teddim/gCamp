@@ -16,4 +16,13 @@ class User < ActiveRecord::Base
   def set_comment_user_id_to_nil(comment)
     comment.user_id = nil
   end
+
+  def is_project_member(project)
+    if project.memberships.find_by(user_id: self.id)
+      return true
+    else
+      false
+    end
+  end
+
 end

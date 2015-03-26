@@ -3,6 +3,9 @@
   <h1>Projects</h1>
 </div>
 
+<div class="">
+
+</div>
   <table class="table">
     <thead>
       <tr>
@@ -13,13 +16,17 @@
     </thead>
 
     <% @projects.each do |project| %>
-      <tr>
-        <td><%= link_to project.name, project %></td>
-        <td>
-        </td>
-        <td>
-          <%= link_to project.tasks.count.to_s, project_tasks_path(project) %>
-        </td>
-    </tr>
+      <% if current_user.is_project_member(project) %>
+        <tr>
+          <td>
+              <%= link_to project.name, project %>
+          </td>
+          <td>
+          </td>
+          <td>
+            <%= link_to project.tasks.count.to_s, project_tasks_path(project) %>
+          </td>
+      </tr>
+      <% end %>
     <% end %>
   </table>
