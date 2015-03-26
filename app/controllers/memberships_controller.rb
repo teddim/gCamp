@@ -2,6 +2,7 @@ class MembershipsController <ApplicationController
 
   before_action :find_project
   before_action :find_user
+  before_action :project_member
 
   def index
     @membership = Membership.new
