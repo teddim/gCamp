@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
 
   before_action :find_project
-
+  before_action :project_member
+  
   def index
     @tasks = @project.tasks.order(:id)
 
