@@ -4,7 +4,8 @@ class MembershipsController <ApplicationController
   before_action :find_user
   before_action :project_member
   before_action :project_owner, only: [:update, :edit]
-  before_action :last_project_owner, only: [:update, :destroy]
+  before_action :last_project_owner, only: [:edit, :update, :destroy]
+
 
   def index
     @membership = Membership.new
@@ -38,11 +39,7 @@ class MembershipsController <ApplicationController
     membership.destroy
     @user = membership.user.full_name
     flash[:notice] = "#{@user} was successfully removed"
-    if current_user.is_project_owner(@project)
-      redirect_to project_memberships_path(@project)
-    else
-      redirect_to projects_path
-    end
+    redirect_to projects_path
   end
 
   private

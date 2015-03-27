@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user
 
-
   def current_user
     User.find_by(id: session[:user_id])
   end
@@ -31,11 +30,18 @@ class ApplicationController < ActionController::Base
   end
 
   def project_owner
-    if  !(current_user.is_project_owner(@project))
+    if !(current_user.is_project_owner(@project))
       flash[:error] = "You do not have access"
       redirect_to project_path(@project)
     end
 
+  end
+
+  def last_project_owner
+    if (current_user.is_last_project_owner(@project))
+      flash[:error] = "Projects must have at least one owner"
+      redirect_to project_memberships_path(@project)
+    end
   end
 
 end

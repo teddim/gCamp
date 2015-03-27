@@ -2,8 +2,6 @@
   <h1><%= @project.name %>: Manage Members</h1>
 </div>
 
-<%= current_user.is_last_project_owner(@project) %>
-
 <ol class="breadcrumb">
   <li><%= link_to 'Projects', projects_path %></li>
   <li><%= link_to @project.name, project_path(@project) %></li>
@@ -50,7 +48,9 @@
             </div>
 
           <% end %>
-          <% if current_user.is_project_owner(@project) %>
+          <% if current_user.is_last_project_owner(@project) %>
+
+          <% else if current_user.is_project_owner(@project) %>
             <div class= "col-md-2">
               <%= link_to "", project_membership_path(@project,membership), method: :delete, class: "glyphicon glyphicon-remove" %>
             </div>
@@ -59,6 +59,7 @@
             <div class= "col-md-2">
               <%= link_to "", project_membership_path(@project,membership), method: :delete, class: "glyphicon glyphicon-remove" %>
             </div>
+          <% end %>
           <% end %>
           <% end %>
 

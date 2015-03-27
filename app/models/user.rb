@@ -27,7 +27,14 @@ class User < ActiveRecord::Base
 
   def is_project_owner(project)
     if self.memberships.where(project_id: project).where(role: "owner").present?
-  # binding.pry
+      return true
+    else
+      false
+    end
+  end
+
+  def is_last_project_owner(project)
+    if project.memberships.where(role: "owner").pluck(:id).count == 1
       return true
     else
       false
