@@ -9,6 +9,7 @@
 </ol>
 
 <%= render partial: "shared/error_left", locals: {object: @membership} %>
+<% if current_user.is_project_owner(@project) %>
 <div class="row">
   <div class="col-md-7">
     <div class="well">
@@ -23,22 +24,37 @@
 
   </div>
 </div>
-
-<div class = "row">
-<% @memberships.each do |membership| %>
-  <div class="form-group col-md-12">
-    <%= form_for [@project,membership] do |ed| %>
-    <div>
-      <div><%= link_to "#{membership.user.full_name}", user_path(membership.user), class: "col-md-2" %></div>
-      <div class="col-md-2"><%= ed.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class:'form-control'}) %></div>
-      <div class="col-md-2">
-        <%= ed.submit "Update", class: "btn btn-primary" %>
-      </div>
-      <div class= "col-md-2">
-        <%= link_to "", project_membership_path(@project,membership), method: :delete, class: "glyphicon glyphicon-remove" %>
-      </div>
-    </div>
-    <% end %>
-  </div>
 <% end %>
+<div class = "row">
+  <% @memberships.each do |membership| %>
+    <div class="form-group col-md-12">
+      <%= form_for [@project,membership] do |ed| %>
+        <div>
+          <div>
+            <%= link_to "#{membership.user.full_name}", user_path(membership.user), class: "col-md-2" %>
+          </div>
+          <% if current_user.is_project_owner(@project) %>
+            <div class="col-md-2">
+              <%= ed.collection_select(:role, Membership::ROLES, :to_s, :capitalize,{}, {class:'form-control'}) %>
+            </div>
+            <div class="col-md-2">
+            <%= ed.submit "Update", class: "btn btn-primary" %>
+            </div>
+          <% else %>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+              <%= membership.role %>
+            </div>
+
+          <% end %>
+          <% if current_user.is_project_owner(@project) %>
+            <div class= "col-md-2">
+              <%= link_to "", project_membership_path(@project,membership), method: :delete, class: "glyphicon glyphicon-remove" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>

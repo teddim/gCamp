@@ -3,6 +3,7 @@ class MembershipsController <ApplicationController
   before_action :find_project
   before_action :find_user
   before_action :project_member
+  before_action :project_owner, only: [ :update, :destroy, :edit]
 
   def index
     @membership = Membership.new
