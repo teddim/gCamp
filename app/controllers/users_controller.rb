@@ -47,10 +47,15 @@ class UsersController < ApplicationController
     @user.comments.each do |comment|
       @user.set_comment_user_id_to_nil(comment)
     end
+    if @user = current_user
+      session.clear
+      where_to_redirect = root_path
+    else
+      where_to_redirect = users_path
+    end
     if @user.destroy
       flash[:notice] = "User was successfully deleted"
-      session.clear
-      redirect_to users_path
+      redirect_to where_to_redirect
     end
   end
 
@@ -59,9 +64,9 @@ class UsersController < ApplicationController
 
   def user_params
     if current_user.is_admin
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,:admin)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,:admin, :pivotal_token)
     else
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :pivotal_token)
     end
   end
 

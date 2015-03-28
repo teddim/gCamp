@@ -15,6 +15,7 @@ feature 'Users CRUD Happy Path-' do
     fill_in 'Email', with: 't@t2.com'
     fill_in 'Password', with: 'test'
     fill_in 'Password confirmation', with: 'test'
+    fill_in 'Pivotal Tracker Token', with: 'pivotal token'
 
     click_on 'Create User'
     expect(page).to have_content('Tester2')
@@ -55,7 +56,7 @@ feature 'Users CRUD Happy Path-' do
   end
 
   scenario 'DELETE: User can delete a user' do
-    user = create_user(first_name: 'Another', last_name: 'One', email:'t2@t.com')
+    user = create_user(first_name: 'Another', last_name: 'One', email:'t2@t.com', admin: true, pivotal_token: "pivotal token")
     visit edit_user_path(user)
     click_on 'Delete'
     expect(page).to have_no_content('Another')
