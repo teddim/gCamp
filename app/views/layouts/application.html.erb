@@ -17,12 +17,7 @@
               Projects <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-              <% if current_user.is_admin %>
-                <% projects = all_projects %>
-              <% else %>
-                <% projects = current_user.projects %>
-              <% end %>
-              <% projects.each do |project| %>
+              <% projects_list.each do |project| %>
               <li>  <%= link_to project.name, project_path(project)%> </li>
               <% end %>
               <li role="presentation" class="divider"></li>

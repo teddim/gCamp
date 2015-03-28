@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   helper_method :authenticate_user
   helper_method :project_member
   helper_method :project_owner
+  helper_method :projects_list
+
 
   before_action :authenticate_user
 
@@ -14,9 +16,11 @@ class ApplicationController < ActionController::Base
     User.find_by(id: session[:user_id])
   end
 
-  def all_projects
+  def projects_list
     if current_user.is_admin
       Project.all
+    else
+      current_user.projects
     end
   end
 

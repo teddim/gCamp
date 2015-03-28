@@ -4,7 +4,17 @@ def create_user(overrides={})
     last_name:'Test',
     email: 't@t.com',
     password: 'test',
-    password_confirmation: 'test'
+    password_confirmation: 'test',
+    admin: true
+  }.merge(overrides))
+end
+
+def create_member(overrides={})
+  project = create_project
+  Membership.create!({
+    role: 'member',
+    user_id: User.first,
+    project_id: project.id
   }.merge(overrides))
 end
 
