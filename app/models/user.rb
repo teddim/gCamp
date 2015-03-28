@@ -18,16 +18,16 @@ class User < ActiveRecord::Base
   end
 
   def is_project_member(project)
-    if project.memberships.find_by(user_id: self.id)
-      return true
+    if project.memberships.find_by(user_id: self.id) || self.admin
+      true
     else
       false
     end
   end
 
   def is_project_owner(project)
-    if self.memberships.where(project_id: project).where(role: "owner").present?
-      return true
+    if self.memberships.where(project_id: project).where(role: "owner").present? || self.admin
+      true
     else
       false
     end
@@ -35,19 +35,14 @@ class User < ActiveRecord::Base
 
   def is_last_project_owner(project)
     if project.memberships.where(role: "owner").pluck(:id).count == 1
-      return true
+      true
     else
       false
     end
   end
 
-  def is_authorized(user)
-    if self.id == user
-      binding.pry
-      user
-    else
-      false
-    end
+  def is_admin
+    self.admin
   end
 
 end

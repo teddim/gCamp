@@ -32,6 +32,13 @@
         = u.password_field :password_confirmation, class:"form-control"
       .col-sm-2
 
+  - if current_user.is_admin
+    .form-group
+      .col-sm-6.col-sm-offset-2
+        %p
+          = u.check_box :admin
+          Admin
+
   .form-group
     .col-sm-6.col-sm-offset-2
       = u.submit name_of_button, class: "btn btn-primary"

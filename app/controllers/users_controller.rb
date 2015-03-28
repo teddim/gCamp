@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "User was successfully created"
-      redirect_to users_path(user)
+      redirect_to users_path(@user)
     else
       render :new
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
 
-    unless @user == current_user
+    unless @user == current_user || current_user.is_admin
       render file: 'public/404.html', status: :not_found, layout: false
     end
   end
@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
     @user.comments.each do |comment|
       @user.set_comment_user_id_to_nil(comment)
     end
@@ -56,7 +57,11 @@ class UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    if current_user.is_admin
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,:admin)
+    else
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
   end
 
 end
