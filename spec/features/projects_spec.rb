@@ -22,7 +22,9 @@ feature 'Projects CRUD Happy Path for Members-' do
     project = create_project
     visit projects_path
     expect(page).to have_content('My project for today')
-    expect(find_link('My project for today')[:href]).to eq(project_path(project))
+    within(".table") do
+      expect(find_link('My project for today')[:href]).to eq(project_path(project))
+    end
   end
 
   scenario 'READ: User can view a single project on the show page' do
