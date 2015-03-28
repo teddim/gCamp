@@ -49,6 +49,7 @@ class UsersController < ApplicationController
     end
     if @user.destroy
       flash[:notice] = "User was successfully deleted"
+      session.clear
       redirect_to users_path
     end
   end
