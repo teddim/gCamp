@@ -20,13 +20,15 @@
       </td>
 
       <td class = "col-md-3">
-        <%= mail_to user.email %>
+        <% if current_user == user %>
+          <%= mail_to user.email %>
+        <% end %>
       </td>
 
       <td></td>
 
       <td class = "text-right">
-        
+
         <% if current_user.id == user.id %>
 
           <%= link_to "Edit", edit_user_path(user) %>
