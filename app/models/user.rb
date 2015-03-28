@@ -41,4 +41,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_authorized(user)
+    if self.id == user
+      binding.pry
+      user
+    else
+      false
+    end
+  end
+
 end
