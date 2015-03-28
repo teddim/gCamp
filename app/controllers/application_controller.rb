@@ -8,9 +8,14 @@ class ApplicationController < ActionController::Base
   helper_method :project_member
   helper_method :project_owner
   helper_method :projects_list
-
+  helper_method :previous_page
+  helper_method :belong_to_same_project
 
   before_action :authenticate_user
+
+  def previous_page
+    request.fullpath
+  end
 
   def current_user
     User.find_by(id: session[:user_id])
@@ -25,8 +30,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    if current_user
-    else
+    unless current_user
+      session[:previous_page] = request.fullpath
       flash[:error] = "You must sign in"
       redirect_to signin_path
     end
@@ -43,6 +48,12 @@ class ApplicationController < ActionController::Base
     unless (current_user.is_project_owner(@project) || current_user.is_admin)
       flash[:error] = "You do not have access"
       redirect_to project_path(@project)
+    end
+  end
+
+  def belong_to_same_project(user1,user2)
+    unless user2.projects.where(id: user1.projects) == []
+      true
     end
   end
 
