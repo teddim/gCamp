@@ -2,14 +2,11 @@ class MembershipsController <ApplicationController
 
   before_action :find_project
   before_action :project_member
-  before_action :project_owner, only: [:update, :edit]
-  # before_action :last_project_owner, only: [:edit, :update, :destroy]
-
+  before_action :project_owner, only: [:edit, :update]
 
   def index
     @membership = Membership.new
     @memberships = @project.memberships.all.order(:role)
-
   end
 
   def create
@@ -40,11 +37,10 @@ class MembershipsController <ApplicationController
       flash[:error] = "Projects must have at least one owner"
       redirect_to project_memberships_path and return
     else
-    membership.destroy
-    flash[:notice] = "#{membership.user.full_name} was successfully removed"
+      membership.destroy
+      flash[:notice] = "#{membership.user.full_name} was successfully removed"
     end
     redirect_to projects_path
-
   end
 
   private
@@ -56,4 +52,5 @@ class MembershipsController <ApplicationController
   def membership_params
     params.require(:membership).permit(:role, :project_id, :user_id)
   end
+
 end

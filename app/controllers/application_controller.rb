@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   helper_method :authenticate_user
   helper_method :project_member
   helper_method :project_owner
-  helper_method :all_projects
 
   before_action :authenticate_user
 
@@ -41,7 +40,6 @@ class ApplicationController < ActionController::Base
       flash[:error] = "You do not have access"
       redirect_to project_path(@project)
     end
-
   end
 
 end
