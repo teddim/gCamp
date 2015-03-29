@@ -22,7 +22,7 @@ feature 'Projects CRUD Happy Path for Members-' do
     project = create_project
     visit projects_path
     expect(page).to have_content('My project for today')
-    within(".table") do
+    within("table#gcamp_table") do
       expect(find_link('My project for today')[:href]).to eq(project_path(project))
     end
   end
