@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     resources :memberships
   end
 
+  resources :tracker_projects, only: [:show]
 
   # Example resource route with options:
   #   resources :products do
