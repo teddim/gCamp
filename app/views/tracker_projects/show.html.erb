@@ -9,25 +9,25 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th class= "col-md-3">Story</th>
-      <th class= "col-md-3">Estimate</th>
-      <th class= "col-md-3">Labels </th>
-      <th class= "col-md-3">Current State </th>
+      <th class= "col-md-6">Story</th>
+      <th class= "col-md-2">Estimate</th>
+      <th class= "col-md-2">Labels </th>
+      <th class= "col-md-2">Current State </th>
     </tr>
   </thead>
 
   <% if @tracker_stories %>
     <% @tracker_stories.each do |story| %>
       <tr>
-        <td class = "col-md-3">
+        <td class = "col-md-6">
           <%= story[:name] %>
         </td>
 
-        <td class = "col-md-3">
+        <td class = "col-md-2">
           <%= story[:estimate] %>
         </td>
 
-        <td>
+        <td class = "col-md-2">
           <% label_list = [] %>
           <% story[:labels].each do |label| %>
             <% label_list << label[:name] %>
@@ -35,7 +35,7 @@
           <%= label_list.join(", ") %>
         </td>
 
-        <td class = "col-md-3">
+        <td class = "col-md-2">
           <%= story[:current_state] %>
 
         </td>
