@@ -35,7 +35,7 @@
   .form-group
     = u.label :pivotal_token, 'Pivotal Tracker Token',class:"control-label col-sm-2"
     .col-sm-6
-      = u.text_field :pivotal_token, :value => @user.pivotal, class:"form-control"
+      = u.password_field :pivotal_token, class:"form-control"
     .col-sm-2
 
   - if current_user.is_admin

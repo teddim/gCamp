@@ -45,15 +45,16 @@
       </tr>
     </thead>
 
-<% if @tracker_projects %>
-    <% @tracker_projects.each do |project| %>
-        <tr>
-          <td>
+    <% if @tracker_projects.length == 4 %>
+      <%= flash[:invalid] %>
+      <% else %>
+        <% @tracker_projects.each do |project| %>
+          <tr>
+            <td>
+
               <%= link_to project[:name], tracker_project_path(project[:id]) %>
-          </td>
-
-
-      </tr>
+            </td>
+          </tr>
+        <% end %>
     <% end %>
-<% end %>
-  </table>
+</table>
