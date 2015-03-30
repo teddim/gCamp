@@ -1,31 +1,12 @@
 ![](https://travis-ci.org/teddim/gCamp.svg?branch=master)
 https://travis-ci.org/teddim/gCamp
 
-== README
+Topics covered while creating this app:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Associations (has_many, belongs_to, has_many through)
+* Nested Routes
+* Authentication
+* Authorization
+* Validations
+* Bootstrap
+* Rspec and Capybara testing for features, models, and controllers
