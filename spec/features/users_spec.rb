@@ -27,7 +27,7 @@ feature 'Users CRUD Happy Path-' do
     visit users_path
     expect(page).to have_content('Tester')
     expect(page).to have_content('Test')
-    expect(page).to have_content('t@t.com')
+    expect(page).to have_content('t17@t.com')
   end
 
   scenario 'READ: User can view a single user on the show page' do
