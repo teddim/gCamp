@@ -2,7 +2,6 @@ class CommonQuestion
 
   def initialize(question,answer)
     @question = question
-    puts "This is the model speaking...initializing"
     @answer = answer
     @slug = @question.gsub(" ","-")
 
