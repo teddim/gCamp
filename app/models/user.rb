@@ -45,8 +45,10 @@ class User < ActiveRecord::Base
   end
 
   def pivotal
-    unless pivotal_token == nil
-    "#{pivotal_token[0..3]}****************************"
+    if pivotal_token == nil
+      ""
+    else
+      "#{pivotal_token[0..3]}****************************"
     end
   end
 
