@@ -46,7 +46,7 @@
     </thead>
 
     <% if @tracker_projects && @tracker_projects.length == 4 %>
-      <%= flash[:invalid] %>
+      <%= @tracker_projects[:possible_fix]%>
       <% elsif @tracker_projects %>
         <% @tracker_projects.each do |project| %>
           <tr>
