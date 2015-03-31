@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe AuthenticationController, type: :controller do
 
+  let(:user) { create_user}
+
   describe 'POST #create' do
     context 'when password is invalid' do
       it 'renders the page with error' do
-        user = FactoryGirl.create(:user)
-
         post :create, session: { email: user.email, password: 'invalid' }
-
         expect(response).to render_template(:new)
         expect(flash[:error]).to match(/Email \/ Password combination is invalid/)
       end
@@ -16,8 +15,6 @@ RSpec.describe AuthenticationController, type: :controller do
 
     xcontext 'when password is valid' do
       it 'sets the user in the session and redirects them to their projects page' do
-        user = FactoryGirl.create(:user)
-
         post :create, session: { email: user.email, password: "test" }
         expect(controller.current_user).to eq user
         expect(response).to redirect_to (projects_path)
