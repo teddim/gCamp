@@ -20,7 +20,7 @@
     <% @tracker_stories.each do |story| %>
       <tr>
         <td class = "col-md-6">
-          <%= story[:name] %>
+          <%= link_to story[:name], "https://www.pivotaltracker.com/story/show/#{story[:id]}" %>
         </td>
 
         <td class = "col-md-2">
