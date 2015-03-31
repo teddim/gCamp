@@ -12,7 +12,7 @@ feature 'Users CRUD Happy Path-' do
     click_on 'New User'
     fill_in 'First name', with: 'Tester2'
     fill_in 'Last name', with: 'Test2'
-    fill_in 'Email', with: 't@t2.com'
+    fill_in 'Email', with: 't2@t.com'
     fill_in 'Password', with: 'test'
     fill_in 'Password confirmation', with: 'test'
     fill_in 'Pivotal Tracker Token', with: 'pivotal token'
@@ -20,14 +20,14 @@ feature 'Users CRUD Happy Path-' do
     click_on 'Create User'
     expect(page).to have_content('Tester2')
     expect(page).to have_content('Test2')
-    expect(page).to have_content('t@t2.com')
+    expect(page).to have_content('t2@t.com')
   end
 
   scenario 'READ: User can see a user on the index page' do
     visit users_path
     expect(page).to have_content('Tester')
     expect(page).to have_content('Test')
-    expect(page).to have_content('t17@t.com')
+    expect(page).to have_content('t@t.com')
   end
 
   scenario 'READ: User can view a single user on the show page' do
