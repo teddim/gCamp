@@ -4,7 +4,10 @@ describe ProjectsController do
 
   let(:user) { create_user}
   let(:project) {create_project}
-  let(:membership) {create_membership(user_id: user.id, project_id: project.id)}
+  let(:membership) {create_member(user_id: user.id, project_id: project.id, role: "member")}
+  let(:owner) {create_user(admin: false, email: 'tester3@test.com')}
+  let(:owner_membership) {create_member(project_id: project.id, user_id: owner.id, role: "owner")}
+  let(:admin) {create_user(admin: true, email: 'admin@test.com')}
 
   describe "GET #index" do
     context 'when admin' do
@@ -36,14 +39,13 @@ describe ProjectsController do
         expect(response).to render_template(:show)
       end
     end
-    context 'when member or owner' do
+    context 'when not a member or owner' do
       it "will not show the project show page" do
-        project = create_project
         user2 =  create_user(admin: false, email: 'tester2@test.com')
-        membership = create_member(user_id: user.id, project_id: project.id)
         session[:user_id] = user2.id
         get :show, id: project.id
         expect(response).to redirect_to(projects_path)
+        expect(flash[:error]).to eq("You do not have access to that project")
       end
     end
   end
@@ -63,35 +65,96 @@ describe ProjectsController do
       session[:user_id] = user.id
       post :create, {project: {name: "a created project" }}
       expect(response).to have_http_status(302)
+      expect(flash[:notice]).to eq("Project was successfully created")
     end
   end
 
   describe "GET #edit" do
-    it "does not allow non-owners to edit" do
-      user2 =  create_user(admin: false, email: 'tester2@test.com')
-      session[:user_id] = user2.id
-      get :edit, id: project.id
-      expect(response).to redirect_to(projects_path)
+    context "when non-owner" do
+      it "does not allow editing" do
+        user2 =  create_user(admin: false, email: 'tester2@test.com')
+        session[:user_id] = user2.id
+        get :edit, id: project.id
+        expect(response).to redirect_to(projects_path)
+        expect(flash[:error]).to eq("You do not have access to that project")
+      end
+    end
+    context "when owner" do
+      it "allows editing" do
+        owner
+        owner_membership
+        session[:user_id] = owner.id
+        get :edit, id: project.id
+        expect(response).to have_http_status(200)
+
+      end
+    end
+    context "when admin" do
+      it "allows editing" do
+        admin
+        session[:user_id] = owner.id
+        get :edit, id: project.id
+        expect(response).to redirect_to(projects_path)
+      end
     end
   end
 
   describe "POST #update" do
-    it "does not allow non-owners to update" do
+    context "when a non owner tries to update a project"
+    it "does not allow it" do
       user2 =  create_user(admin: false, email: 'tester2@test.com')
       session[:user_id] = user2.id
-      get :update, id: project.id
+      post :update, id: project.id
       expect(response).to redirect_to(projects_path)
+    end
+    context "when owner updates their own project" do
+      it "updates the requested project" do
+        owner
+        owner_membership
+        session[:user_id] = owner.id
+        put :update, {:id => project.to_param, :project => { "name" => "new name" }}
+        expect(response).to redirect_to(project_path(project))
+      end
+    end
+    context "when admin" do
+      it "updates the requested project" do
+        admin
+        session[:user_id] = admin.id
+        put :update, {:id => project.to_param, :project => { "name" => "new name" }}
+        expect(response).to redirect_to(project_path(project))
+      end
     end
   end
 
   describe "GET #destroy" do
-    it "does not allow non-owners to delete" do
-      user2 =  create_user(admin: false, email: 'tester2@test.com')
-      project2 = create_project(name: "another project")
-      session[:user_id] = user2.id
-      project = Project.create!(name: "something")
-      delete :destroy, {:id => project.to_param}
-      expect(response).to redirect_to(projects_path)
+    context "when non-owner" do
+      it "does not allow non-owners to delete" do
+        user2 =  create_user(admin: false, email: 'tester2@test.com')
+        project2 = create_project(name: "another project")
+        session[:user_id] = user2.id
+        project = Project.create!(name: "something")
+        delete :destroy, {:id => project.to_param}
+        expect(response).to redirect_to(projects_path)
+      end
+    end
+    context "when owner" do
+      it "allows deletion" do
+        owner
+        owner_membership
+        session[:user_id] = owner.id
+        delete :destroy, {:id => project.to_param}
+        expect(response).to redirect_to(projects_path)
+        expect(flash[:notice]).to eq("Project was successfully deleted")
+      end
+    end
+    context "when admin" do
+      it "allows deletion" do
+        admin
+        session[:user_id] = admin.id
+        delete :destroy, {:id => project.to_param}
+        expect(response).to redirect_to(projects_path)
+        expect(flash[:notice]).to eq("Project was successfully deleted")
+      end
     end
   end
 
