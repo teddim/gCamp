@@ -32,3 +32,9 @@ def create_project(overrides={})
       name: 'My project for today',
     }.merge(overrides))
 end
+
+def destroy_records
+  User.destroy_all
+  Membership.destroy_all
+  Project.destroy_all
+end
