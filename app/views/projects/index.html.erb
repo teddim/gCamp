@@ -15,8 +15,8 @@
       </tr>
     </thead>
 
-    <% @projects.each do |project| %>
-      <% if current_user.is_project_member(project) %>
+    <% projects_list.each do |project| %>
+
         <tr>
           <td>
               <%= link_to project.name, project %>
@@ -27,7 +27,7 @@
             <%= link_to project.tasks.count.to_s, project_tasks_path(project) %>
           </td>
       </tr>
-      <% end %>
+
     <% end %>
   </table>
 
