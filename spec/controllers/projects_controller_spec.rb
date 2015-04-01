@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe ProjectsController do
 
-  let(:user) { create_user}
+  let(:user) {create_user}
   let(:project) {create_project}
   let(:membership) {create_member(user_id: user.id, project_id: project.id, role: "member")}
   let(:owner) {create_user(admin: false, email: 'tester3@test.com')}
