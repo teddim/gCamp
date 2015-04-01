@@ -17,7 +17,7 @@
   </thead>
 
   <% if @tracker_stories %>
-    <% @tracker_stories.each do |story| %>
+    <% @tracker_stories[0..499].each do |story| %>
       <tr>
         <td class = "col-md-6">
           <%= link_to story[:name], "https://www.pivotaltracker.com/story/show/#{story[:id]}" %>
