@@ -134,7 +134,7 @@ describe ProjectsController do
         create_member(project_id: project.id, user_id: owner.id, role: "owner")
         session[:user_id] = owner.id
 
-        put :update, {:id => project.to_param, :project => { "name" => "new name" }}
+        post :update, {:id => project.to_param, :project => { "name" => "new name" }}
 
         expect(flash[:notice]).to eq("Project was successfully updated")
         expect(response).to redirect_to(project_path(project))
@@ -144,7 +144,7 @@ describe ProjectsController do
       it "updates the requested project" do
         session[:user_id] = admin.id
 
-        put :update, {:id => project.to_param, :project => { "name" => "new name" }}
+        post :update, {:id => project.to_param, :project => { "name" => "new name" }}
 
         expect(flash[:notice]).to eq("Project was successfully updated")
         expect(response).to redirect_to(project_path(project))

@@ -6,13 +6,14 @@ RSpec.describe TasksController, type: :controller do
   let(:project) {create_project}
   let(:task) {create_task(project_id: project.id)}
   let(:membership) {create_member(user_id: user.id, project_id: project.id, role: "member")}
-  let(:owner) {create_user(admin: false, email: 'tester3@test.com')}
-  let(:admin) {create_user(admin: true, email: 'admin@test.com')}
+  let(:owner) {create_user(admin: false, email: 'owner@test.com')}
+  let(:member) {create_user(admin: false, email: 'member@test.com')}
 
   describe "Permissions for Tasks" do
     context 'user belongs to the project' do
       it "shows all tasks" do
-        session[:user_id] = user.id
+        create_member(user_id: member.id, project_id: project.id, role: "member")
+        session[:user_id] = member.id
 
         get :index, {:id => task.id, :project_id => project.id}
 
@@ -35,8 +36,7 @@ RSpec.describe TasksController, type: :controller do
 
     context 'when admin,' do
       it "shows the tasks" do
-        user2 =  create_user(admin: true, email: 'tester2@test.com')
-        session[:user_id] = admin.id
+        session[:user_id] = user.id
 
         get :index, {:id => task.id, :project_id => project.id}
 
