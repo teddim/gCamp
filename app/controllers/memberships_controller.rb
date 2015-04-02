@@ -36,7 +36,7 @@ class MembershipsController <ApplicationController
     if membership.role == "owner" && @project.memberships.where(role: "owner").count == 1
       flash[:error] = "Projects must have at least one owner"
       redirect_to project_memberships_path and return
-    else
+    elsif current_user.is_project_owner(@project) || membership.user_id == current_user.id
       membership.destroy
       flash[:notice] = "#{membership.user.full_name} was successfully removed"
     end
