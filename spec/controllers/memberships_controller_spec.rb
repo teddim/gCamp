@@ -105,7 +105,7 @@ RSpec.describe MembershipsController, type: :controller do
         session[:user_id] = admin.id
         create_member(project_id: project.id, user_id: owner.id, role: "owner")
 
-        post :update, {project_id: project.id, :id => membership.to_param, :membership => { "role" => "member" }}
+        post :update, {project_id: project.id, :id => membership.to_param, :membership => { role: "member" }}
 
         expect(response).to have_http_status(302)
         expect(flash[:notice]).to eq("#{user.full_name} was successfully updated")
