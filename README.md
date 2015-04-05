@@ -2,6 +2,7 @@
 https://travis-ci.org/teddim/gCamp
 
 [![Code Climate](https://codeclimate.com/github/teddim/gCamp/badges/gpa.svg)](https://codeclimate.com/github/teddim/gCamp)
+[![Test Coverage](https://codeclimate.com/github/teddim/gCamp/badges/coverage.svg)](https://codeclimate.com/github/teddim/gCamp)
 
 Topics covered while creating this app:
 
