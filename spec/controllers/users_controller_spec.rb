@@ -62,7 +62,7 @@ RSpec.describe UsersController, type: :controller do
         get :edit, id: user.id
 
         expect(assigns(:user)).to eq(User.find(user.id))
-        render_template :edit
+        expect(response).to render_template :edit
       end
     end
 
@@ -96,7 +96,7 @@ RSpec.describe UsersController, type: :controller do
         user2 =  create_user(admin: false, email: 'tester2@test.com')
         session[:user_id] = user2.id
 
-        post :update, {:id => user.to_param, :user => { "first_name" => "new name" }}
+        post :update, {id: user.to_param, user: { first_name: "new name" }}
 
         expect(response).to redirect_to(users_path)
       end
@@ -107,7 +107,7 @@ RSpec.describe UsersController, type: :controller do
 
         session[:user_id] = user.id
 
-        post :update, {:id => user.to_param, :user => { "first_name" => "new name" }}
+        post :update, {id: user.to_param, user: { first_name: "new name" }}
 
         expect(flash[:notice]).to eq("User was successfully updated")
         expect(response).to redirect_to(users_path)
@@ -118,7 +118,7 @@ RSpec.describe UsersController, type: :controller do
       it "updates the user" do
         session[:user_id] = admin.id
 
-        put :update, {:id => user.to_param, :user => { "first_name" => "new name" }}
+        put :update, {id: user.to_param, user: { first_name: "new name" }}
 
         expect(flash[:notice]).to eq("User was successfully updated")
         expect(response).to redirect_to(users_path)
@@ -132,7 +132,7 @@ RSpec.describe UsersController, type: :controller do
         user2 =  create_user(admin: false, email: 'tester2@test.com')
         session[:user_id] = user2.id
 
-        delete :destroy, {:id => user.to_param}
+        delete :destroy, {id: user.to_param}
 
         expect(response).to redirect_to(root_path)
       end
@@ -142,7 +142,7 @@ RSpec.describe UsersController, type: :controller do
       it "allows deletion" do
         session[:user_id] = owner.id
 
-        delete :destroy, {:id => user.to_param}
+        delete :destroy, {id: user.to_param}
 
         expect(response).to redirect_to(root_path)
         expect(flash[:notice]).to eq("User was successfully deleted")
@@ -153,7 +153,7 @@ RSpec.describe UsersController, type: :controller do
       it "allows deletion" do
         session[:user_id] = admin.id
 
-        delete :destroy, {:id => user.to_param}
+        delete :destroy, {id: user.to_param}
 
         expect(response).to redirect_to(root_path)
         expect(flash[:notice]).to eq("User was successfully deleted")
