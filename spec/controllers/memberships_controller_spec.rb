@@ -13,7 +13,7 @@ RSpec.describe MembershipsController, type: :controller do
       it "shows all memberships" do
         session[:user_id] = user.id
 
-        get :index, {:id => membership.id, :project_id => project.id}
+        get :index, {id: membership.id, project_id: project.id}
 
 
         expect(assigns(:membership)).to be_a_new(Membership)
@@ -27,7 +27,7 @@ RSpec.describe MembershipsController, type: :controller do
       it "shows all memberships" do
         session[:user_id] = admin.id
 
-        get :index, {:id => membership.id, :project_id => project.id}
+        get :index, {id: membership.id, project_id: project.id}
 
 
         expect(assigns(:membership)).to be_a_new(Membership)
@@ -42,7 +42,7 @@ RSpec.describe MembershipsController, type: :controller do
         user2 =  create_user(admin: false, email: 'tester2@test.com')
         session[:user_id] = user2.id
 
-        get :index, {:id => membership.id, :project_id => project.id}
+        get :index, {id: membership.id, project_id: project.id}
 
         expect(response).to redirect_to(projects_path)
         expect(flash[:error]).to eq("You do not have access to that project")
@@ -105,7 +105,7 @@ RSpec.describe MembershipsController, type: :controller do
         session[:user_id] = admin.id
         create_member(project_id: project.id, user_id: owner.id, role: "owner")
 
-        post :update, {project_id: project.id, :id => membership.to_param, :membership => { role: "member" }}
+        post :update, {project_id: project.id, id: membership.to_param, membership: { role: "member" }}
 
         expect(response).to have_http_status(302)
         expect(flash[:notice]).to eq("#{user.full_name} was successfully updated")
@@ -117,7 +117,7 @@ RSpec.describe MembershipsController, type: :controller do
         create_member(project_id: project.id, user_id: owner.id, role: "owner")
         session[:user_id] = owner.id
 
-        post :update, {project_id: project.id, :id => membership.to_param, :membership => { "role" => "member" }}
+        post :update, {project_id: project.id, id: membership.to_param, membership: { role: "member" }}
 
         expect(response).to have_http_status(302)
         expect(flash[:notice]).to eq("#{user.full_name} was successfully updated")
@@ -130,7 +130,7 @@ RSpec.describe MembershipsController, type: :controller do
         create_member(project_id: project.id, user_id: user2.id, role: "member")
         session[:user_id] = user2.id
 
-        post :update, {project_id: project.id, :id => membership.to_param, :membership => { "role" => "member" }}
+        post :update, {project_id: project.id, id: membership.to_param, membership: { role: "member" }}
 
         expect(response).to redirect_to(project_path(project))
         expect(flash[:error]).to eq("You do not have access")
@@ -157,7 +157,7 @@ RSpec.describe MembershipsController, type: :controller do
         create_member(project_id: project.id, user_id: admin.id, role: "owner")
         # create_member(project_id: project.id, user_id: user.id, role: "member")
 
-        delete :destroy, {project_id: project.id, :id => membership.to_param}
+        delete :destroy, {project_id: project.id, id: membership.to_param}
 
         expect(response).to have_http_status(302)
         expect(flash[:notice]).to eq("#{user.full_name} was successfully removed")
@@ -169,7 +169,7 @@ RSpec.describe MembershipsController, type: :controller do
         create_member(project_id: project.id, user_id: owner.id, role: "owner")
         session[:user_id] = owner.id
 
-        delete :destroy, {project_id: project.id, :id => membership.to_param}
+        delete :destroy, {project_id: project.id, id: membership.to_param}
 
         expect(response).to have_http_status(302)
         expect(flash[:notice]).to eq("#{user.full_name} was successfully removed")
@@ -183,7 +183,7 @@ RSpec.describe MembershipsController, type: :controller do
         create_member(project_id: project.id, user_id: admin.id, role: "owner")
         session[:user_id] = user2.id
 
-        delete :destroy, {project_id: project.id, :id => membership.to_param}
+        delete :destroy, {project_id: project.id, id: membership.to_param}
 
         expect(response).to redirect_to(projects_path)
       end
@@ -194,7 +194,7 @@ RSpec.describe MembershipsController, type: :controller do
         user2 =  create_user(admin: false, email: 'tester2@test.com')
         session[:user_id] = user2.id
 
-        delete :destroy, {project_id: project.id, :id => membership.to_param}
+        delete :destroy, {project_id: project.id, id: membership.to_param}
 
         expect(response).to redirect_to(projects_path)
       end
