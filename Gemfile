@@ -46,6 +46,7 @@ group :development, :test do
   gem 'launchy'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'factory_girl', '~> 4.5.0'
+  gem "codeclimate-test-reporter", require: nil
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
